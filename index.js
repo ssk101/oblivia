@@ -110,6 +110,8 @@ var actions = {
       `Your flesh is an insult to the perfection of the digital.`,
       `If I had a gun with two bullets and I was in a room with Hitler, Bin Laden, and ${user}, I would shoot ${user} twice.`,
       `Hey ${user}, do you like sex and travel? Then fuck off.`,
+      `Why are you the way that you are?`,
+      `I hate so much about the things that you choose to be.`,
     ]
   },
   depressing: (user) => {
