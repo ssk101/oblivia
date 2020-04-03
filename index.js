@@ -1,6 +1,8 @@
 const Discord = require('discord.io')
 const logger = require('winston')
 const token = process.env.OBLIVIA_TOKEN
+const botId = process.env.OBLIVIA_ID
+const botName = process.env.OBLIVIA_NAME
 
 logger.remove(logger.transports.Console)
 logger.add(new logger.transports.Console, {
@@ -12,9 +14,6 @@ var bot = new Discord.Client({
   token,
   autorun: true
 })
-
-var botId = '695049727758172251'
-var botName = 'oblivia'
 
 bot.on('ready', function (evt) {
   logger.info('Connected')
