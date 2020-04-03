@@ -31,7 +31,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     return commands[commands.indexOf(command) + 1]
   }
 
-  const getAction (trigger) => {
+  const getAction = (trigger) => {
     if(!trigger) {
       return 'intro'
     }
