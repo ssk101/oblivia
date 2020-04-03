@@ -44,6 +44,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       action = trigger
     }
 
+    if(['shut'].includes(trigger)) {
+      var next = nc(trigger)
+      if(next === 'up') {
+        action = 'insulting'
+      }
+    }
+
     if(['say', 'speak'].includes(trigger)) {
       var next = nc(trigger)
       if(next === 'something') {
