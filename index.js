@@ -55,15 +55,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var next = nc(next)
         if(!next) {
           action = 'something'
-        }
-
-        if(next && !['commands', 'intro', 'something'].includes(next)) {
+        } else if(next && !['commands', 'intro', 'something'].includes(next)) {
           action = next
         } else {
           action = 'default'
         }
       } else {
-          action = 'default'
+        action = 'default'
       }
     }
 

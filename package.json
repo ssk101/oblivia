@@ -6,9 +6,11 @@
    "author": "ssky101",
    "dependencies": {
       "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+      "reddit": "^1.0.3",
       "winston": "^3.2.1"
    },
    "devDependencies": {
+      "node-fetch": "^2.6.0",
       "nodemon": "^2.0.2"
    }
 }
