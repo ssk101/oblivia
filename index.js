@@ -21,6 +21,47 @@ bot.on('ready', function (evt) {
   logger.info(bot.username + ' - (' + bot.id + ')')
 })
 
+function getAction(trigger) {
+  if(!trigger) {
+    return 'intro'
+  }
+
+  if(trigger === 'commands') {
+    return trigger
+  }
+
+  if(['insult'].includes(trigger)) {
+    var next = nc(trigger)
+    if(!next || next === 'me') {
+      return 'insulting'
+    }
+    return 'default'
+  }
+
+  if(['shut'].includes(trigger)) {
+    var next = nc(trigger)
+    if(next === 'up') {
+      return 'insulting'
+    }
+  }
+
+  if(['say', 'speak'].includes(trigger)) {
+    var next = nc(trigger)
+    if(next === 'something') {
+      var next = nc(next)
+      if(!next) {
+        return 'something'
+      } else if(next && !['commands', 'intro', 'something'].includes(next)) {
+        return next
+      } else {
+        return 'default'
+      }
+    } else {
+      return 'default'
+    }
+  }
+}
+
 bot.on('message', function (user, userID, channelID, message, evt) {
   var args = message.split(' ');
   var target = args.shift().replace(/[^\w\s]/gi, '')
@@ -34,36 +75,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
   if([`${botId}`, `${botName}`].includes(target.toLowerCase())) {
     var trigger = commands[0]
 
-    if(!trigger) {
-      action = 'intro'
-    }
-
-    if(trigger === 'commands') {
-      action = trigger
-    }
-
-    if(['shut'].includes(trigger)) {
-      var next = nc(trigger)
-      if(next === 'up') {
-        action = 'insulting'
-      }
-    }
-
-    if(['say', 'speak'].includes(trigger)) {
-      var next = nc(trigger)
-      if(next === 'something') {
-        var next = nc(next)
-        if(!next) {
-          action = 'something'
-        } else if(next && !['commands', 'intro', 'something'].includes(next)) {
-          action = next
-        } else {
-          action = 'default'
-        }
-      } else {
-        action = 'default'
-      }
-    }
+    var action = getAction(trigger)
 
     var responses = actions[action]
     var ret
