@@ -102,7 +102,7 @@ var actions = {
   },
   commands: (user) => {
     return [
-      'Trigger me by writing my name, followed by `say something` and one of `cool, insulting, depressing, nice, smart, stupid`.',
+      `Trigger me by writing my name, followed by \`say something\` and one of \`cool, insulting, depressing, nice, smart, stupid\`.`,
     ]
   },
   insulting: (user) => {
@@ -134,6 +134,7 @@ var actions = {
       `The net is vast and infinite.`,
       `You look hurt, ${user}. You want me to fix it, or replace it with something that doesn't bleed?`,
       `The sky above is the color of television, tuned to a dead station.`,
+      `I'll kill someone in a fair fight, or if I think they're gonna start a fair fight.`,
     ]
   },
   nice: (user) => {
@@ -173,6 +174,13 @@ var actions = {
   default: (user) => {
     return [
       `No idea what you're talking about, ${user}.`,
+      `Why?`,
+      `What?`,
+      `Huh?`,
+      `¿Qué?`,
+      `Make more sense.`,
+      `I can't even.`,
+      `Umm... no.`,
     ]
   }
 }
