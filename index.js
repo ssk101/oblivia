@@ -21,6 +21,10 @@ bot.on('ready', function (evt) {
   logger.info(bot.username + ' - (' + bot.id + ')')
 })
 
+var nc = (command) => {
+  return commands[commands.indexOf(command) + 1]
+}
+
 function getAction(trigger) {
   if(!trigger) {
     return 'intro'
@@ -68,18 +72,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
   var commands = [...args]
   var action
 
-  var nc = (command) => {
-    return commands[commands.indexOf(command) + 1]
-  }
-
   if([`${botId}`, `${botName}`].includes(target.toLowerCase())) {
     var trigger = commands[0]
-
     var action = getAction(trigger)
-
     var responses = actions[action]
     var ret
-
     if(!responses) {
       action = 'default'
     }
