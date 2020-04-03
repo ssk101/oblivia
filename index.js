@@ -1,37 +1,45 @@
-const Discord = require('discord.io');
-const logger = require('winston');
+const Discord = require('discord.io')
+const logger = require('winston')
 const token = process.env.OBLIVIA_TOKEN
 
 logger.remove(logger.transports.Console)
 logger.add(new logger.transports.Console, {
-    colorize: true
+  colorize: true
 })
-
 logger.level = 'debug'
 
 var bot = new Discord.Client({
-   token,
-   autorun: true
+  token,
+  autorun: true
 })
 
+var botId = '695049727758172251'
+var botName = 'oblivia'
+
 bot.on('ready', function (evt) {
-    logger.info('Connected')
-    logger.info('Logged in as: ')
-    logger.info(bot.username + ' - (' + bot.id + ')')
+  logger.info('Connected')
+  logger.info('Logged in as: ')
+  logger.info(bot.username + ' - (' + bot.id + ')')
 })
 
 bot.on('message', function (user, userID, channelID, message, evt) {
   var args = message.split(' ');
-  var target = args.shift().replace(/[^@\w\s]/gi, '')
+  var target = args.shift().replace(/[^\w\s]/gi, '')
   var commands = [...args]
+  var action
 
   var nc = (command) => {
     return commands[commands.indexOf(command) + 1]
   }
 
-  if(target === '@oblivia') {
-    var action
+  console.log(target)
+
+  if([`${botId}`, `${botName}`].includes(target.toLowerCase())) {
     var trigger = commands[0]
+
+    if(!trigger) {
+      action = 'intro'
+    }
 
     if(trigger === 'commands') {
       action = trigger
@@ -43,7 +51,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var next = nc(next)
         if(!next) {
           action = 'something'
-        } else if(next && ['nice', 'cool', 'stupid'].includes(next)) {
+        }
+
+        if(next && !['commands', 'intro', 'something'].includes(next)) {
           action = next
         } else {
           action = 'default'
@@ -53,10 +63,17 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       }
     }
 
-    var res = responses[action](user) || []
+    var responses = actions[action]
     var ret
+
+    if(!responses) {
+      action = 'default'
+    }
+
+    var res = actions[action](user) || []
+
     if(!res.length) {
-      ret = responses.default(user)
+      ret = actions.default(user)
     } else {
       ret = res[Math.floor(Math.random() * res.length)]
     }
@@ -68,10 +85,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
   }
 })
 
-var responses = {
+var actions = {
+  intro: (user) => {
+    return [
+      'What the hell do you want now?',
+      `Yeah? Make it quick, I'm busy.`,
+      `What now?`,
+      `Sup?`,
+      `That's me.`,
+      `One sec, this idiot ${user} is talking to me. ...oops, wrong chat.`,
+    ]
+  },
   commands: (user) => {
     return [
-      'cool, insulting, depressing, nice, smart, stupid',
+      'Trigger me by writing my name, followed by `say something` and one of `cool, insulting, depressing, nice, smart, stupid`.',
     ]
   },
   insulting: (user) => {
@@ -82,9 +109,11 @@ var responses = {
     ]
   },
   depressing: (user) => {
-    `It's impossible to move, to live, to operate at any level without leaving traces, bits, seemingly meaningless fragments of personal information.`,
-    `The future is already here. It's just not very evenly distributed.`,
-    `Life is the shit that happens when you're waiting for moments that never come.`,
+    return [
+      `It's impossible to move, to live, to operate at any level without leaving traces, bits, seemingly meaningless fragments of personal information.`,
+      `The future is already here. It's just not very evenly distributed.`,
+      `Life is the shit that happens when you're waiting for moments that never come.`,
+    ]
   },
   smart: (user) => {
     return [
