@@ -31,8 +31,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     return commands[commands.indexOf(command) + 1]
   }
 
-  console.log(target)
-
   if([`${botId}`, `${botName}`].includes(target.toLowerCase())) {
     var trigger = commands[0]
 
@@ -111,7 +109,7 @@ var actions = {
     return [
       `Your flesh is an insult to the perfection of the digital.`,
       `If I had a gun with two bullets and I was in a room with Hitler, Bin Laden, and ${user}, I would shoot ${user} twice.`,
-      `Hey ${user}, do you like sex and travel? So fuck off.`,
+      `Hey ${user}, do you like sex and travel? Then fuck off.`,
     ]
   },
   depressing: (user) => {
