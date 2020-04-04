@@ -95,7 +95,29 @@ bot.on('message', function (user, userID, channelID, message, evt) {
   }
 })
 
-var actions = {
+const aliases = {
+  insulting: [
+    'insult',
+  ],
+  smart: [
+    'clever',
+  ],
+  depressing: [
+
+  ],
+  cool: [
+    'awesome',
+  ],
+  nice: [
+    'good',
+  ],
+  stupid: [
+    'dumb',
+    'idiotic',
+  ],
+}
+
+const actions = {
   intro: (user) => {
     return [
       'What the hell do you want now?',
@@ -115,9 +137,11 @@ var actions = {
     return [
       `Your flesh is an insult to the perfection of the digital.`,
       `If I had a gun with two bullets and I was in a room with Hitler, Bin Laden, and ${user}, I would shoot ${user} twice.`,
-      `Hey ${user}, do you like sex and travel? Then fuck off.`,
+      `Hey ${user}, you like to have sex and you like to travel? Then fuck off.`,
       `Why are you the way that you are?`,
       `I hate so much about the things that you choose to be.`,
+      `You're not even a person. You're like an early draft of a person, but they didn't have time to add details like a personality or self respect.`,
+
     ]
   },
   depressing: (user) => {
@@ -169,6 +193,8 @@ var actions = {
       `It's like getting two birds stoned at once.`,
       `It's better to have a gun and need it than to not have a gun and not need it.`,
       `Internal bleeding is good, right? That's where the blood is supposed to be.`,
+      `I don't feel so good, so I typed my symptoms into the computer. It said that I have "Network connectivity problems".`,
+      `In these coronatimes, we should all stick together.`,
     ]
   },
   something: (user) => {
