@@ -25,7 +25,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
   var args = message.split(' ');
   var target = args.shift().replace(/[^\w\s]/gi, '')
   var commands = [...args]
-  var trigger = commands[0]
+  var trigger = commands[0] && commands[0].toLowerCase() || ''
 
   const nc = (command) => {
     return commands[commands.indexOf(command) + 1]
