@@ -153,7 +153,7 @@ const actions = {
       `I love you too, ${user}. As a friend. My best friend.`,
       `That's so sweet.`,
     ]
-  }
+  },
   insulting: (user) => {
     return [
       `Your flesh is an insult to the perfection of the digital.`,
