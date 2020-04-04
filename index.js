@@ -41,8 +41,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     }
 
     if(['i'].includes(trigger)) {
-      if(nc(trigger) === 'love') {
-        if(nc(trigger) === 'you') {
+      var next = nc(trigger)
+      if(next === 'love') {
+        next = nc(trigger)
+        if(next === 'you') {
           return 'love'
         } else {
           return 'general'
@@ -143,6 +145,9 @@ const actions = {
     return [
       `Trigger me by writing my name, followed by \`say something\` and one of \`cool, insulting, depressing, nice, smart, stupid\`.`,
     ]
+  },
+  general: (user) => {
+    `That's very interesting.`,
   },
   love: (user) => {
     return [
