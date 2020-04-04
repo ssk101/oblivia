@@ -176,6 +176,7 @@ const actions = {
     return [
       `When you want to know how things really work, study them when they're coming apart.`,
       `Speak only if you can improve the silence.`,
+      `Inside every cynical person, there is a disappointed idealist.`,
     ]
   },
   cool: (user) => {
