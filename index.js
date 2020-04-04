@@ -40,6 +40,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       return trigger
     }
 
+    if(trigger === 'fuck') {
+      var next = nc(trigger)
+      if(next === 'off') {
+        return 'insulting'
+      }
+      return 'general'
+    }
+
     if(['i'].includes(trigger)) {
       var next = nc(trigger)
       if(next === 'love') {
@@ -50,7 +58,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
           return 'general'
         }
       }
-      return 'default'
+      return 'unknown'
     }
 
     if(['insult'].includes(trigger)) {
@@ -58,7 +66,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       if(!next || next === 'me') {
         return 'insulting'
       }
-      return 'default'
+      return 'unknown'
     }
 
     if(['shut'].includes(trigger)) {
@@ -77,10 +85,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         } else if(next && !['commands', 'intro', 'something'].includes(next)) {
           return next
         } else {
-          return 'default'
+          return 'unknown'
         }
       } else {
-        return 'default'
+        return 'unknown'
       }
     }
   }
@@ -90,13 +98,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     var responses = actions[action]
     var ret
     if(!responses) {
-      action = 'default'
+      action = 'unknown'
     }
 
     var res = actions[action](user) || []
 
     if(!res.length) {
-      ret = actions.default(user)
+      ret = actions.unknown(user)
     } else {
       ret = res[Math.floor(Math.random() * res.length)]
     }
@@ -231,7 +239,7 @@ const actions = {
       `The internet was a mistake.`,
     ]
   },
-  default: (user) => {
+  unknown: (user) => {
     return [
       `No idea what you're talking about, ${user}.`,
       `Why?`,
