@@ -51,7 +51,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     if(['i'].includes(trigger)) {
       var next = nc(trigger)
       if(next === 'love') {
-        next = nc(trigger)
+        next = nc(next)
         if(next === 'you') {
           return 'love'
         } else {
