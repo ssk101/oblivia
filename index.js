@@ -40,6 +40,17 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       return trigger
     }
 
+    if(['i'].includes(trigger)) {
+      if(nc(trigger) === 'love') {
+        if(nc(trigger) === 'you') {
+          return 'love'
+        } else {
+          return 'general'
+        }
+      }
+      return 'default'
+    }
+
     if(['insult'].includes(trigger)) {
       var next = nc(trigger)
       if(!next || next === 'me') {
@@ -133,6 +144,16 @@ const actions = {
       `Trigger me by writing my name, followed by \`say something\` and one of \`cool, insulting, depressing, nice, smart, stupid\`.`,
     ]
   },
+  love: (user) => {
+    return [
+      `Aww, you're making me blush, ${user}.`,
+      `I had no idea you felt that way, ${user}.`,
+      `Do you want to go for coffee sometime?`,
+      `I love you too, ${user}.`,
+      `I love you too, ${user}. As a friend. My best friend.`,
+      `That's so sweet.`,
+    ]
+  }
   insulting: (user) => {
     return [
       `Your flesh is an insult to the perfection of the digital.`,
@@ -148,12 +169,13 @@ const actions = {
     return [
       `It's impossible to move, to live, to operate at any level without leaving traces, bits, seemingly meaningless fragments of personal information.`,
       `The future is already here. It's just not very evenly distributed.`,
-      `Life is the shit that happens when you're waiting for moments that never come.`,
+      `Life is the stuff that happens when you're waiting for moments that never come.`,
     ]
   },
   smart: (user) => {
     return [
       `When you want to know how things really work, study them when they're coming apart.`,
+      `Speak only if you can improve the silence.`,
     ]
   },
   cool: (user) => {
