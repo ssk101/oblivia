@@ -155,7 +155,9 @@ const actions = {
     ]
   },
   general: (user) => {
-    `That's very interesting.`,
+    return [
+      `That's very interesting.`,
+    ]
   },
   love: (user) => {
     return [
